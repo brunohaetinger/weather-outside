@@ -12,11 +12,16 @@ interface WeatherCardProps {
 }
 
 const styles = {
+  card: {
+    borderRadius: "15px",
+    backgroundColor: "dimgray",
+    border: "1px solid white",
+  },
   hover: {
     cursor: "pointer",
   },
   selectedCard: {
-    border: "3px solid #ff6384",
+    border: "3px solid var(--primaryorange)",
   },
 };
 
@@ -30,7 +35,10 @@ const WeatherCard: React.FC<WeatherCardProps> = ({
   return (
     <Card
       variant="outlined"
-      style={isSelected ? styles.selectedCard : styles.hover}
+      style={{
+        ...styles.card,
+        ...(isSelected ? styles.selectedCard : styles.hover),
+      }}
       onClick={() => onClick(date)}
     >
       <CardContent>

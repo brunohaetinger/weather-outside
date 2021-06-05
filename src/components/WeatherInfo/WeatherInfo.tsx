@@ -32,7 +32,7 @@ const styles = {
     cursor: "pointer",
   },
   disabled: {
-    color: "lightgray",
+    color: "#d3d3d333",
   },
 };
 
@@ -106,11 +106,13 @@ const WeatherInfo: React.FC = () => {
           value={TemperatureUnit.METRIC}
           control={<Radio />}
           label="Celcius"
+          color="secondary"
         />
         <FormControlLabel
           value={TemperatureUnit.IMPERIAL}
           control={<Radio />}
           label="Fahrenheit"
+          color="secondary"
         />
       </RadioGroup>
 
