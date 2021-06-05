@@ -16,6 +16,7 @@ const styles = {
     borderRadius: "15px",
     backgroundColor: "dimgray",
     border: "1px solid white",
+    margin: "0 10px",
   },
   hover: {
     cursor: "pointer",
