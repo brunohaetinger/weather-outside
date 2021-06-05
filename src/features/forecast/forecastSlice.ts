@@ -38,7 +38,8 @@ export const fetchForecast = createAsyncThunk(
   "forecast/fetchForecast",
   async (unit: TemperatureUnit) => {
     const response = await client.get(
-      `https://api.openweathermap.org/data/2.5/forecast?q=${CITY}&APPID=${APP_ID}&cnt=${TIMESTAMP_AMOUNT}&units=${unit}`
+      `https://api.openweathermap.org/data/2.5/forecast?q=${CITY}&APPID=${APP_ID}&cnt=${TIMESTAMP_AMOUNT}&units=${unit}`,
+      { useProxy: true }
     );
     return response.list;
   }

@@ -25,7 +25,9 @@ export async function client(
     // As we are requesting to another origin, using an API key, we are blocked while using fetch.
     // So, this URL serves as a backend to bypass CORS.
     const response = await window.fetch(
-      `${process.env.REACT_APP_PROXY_URL}${endpoint}`,
+      `${
+        customConfig.useProxy ? process.env.REACT_APP_PROXY_URL : ""
+      }${endpoint}`,
       config
     );
     data = await response.json();
