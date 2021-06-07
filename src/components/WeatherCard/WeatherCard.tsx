@@ -44,7 +44,8 @@ const WeatherCard: React.FC<WeatherCardProps> = ({
     >
       <CardContent>
         <Typography variant="h5" component="h2">
-          Temp: {temperature}°{unit === TemperatureUnit.IMPERIAL ? "F" : "C"}
+          Temp:{" "}
+          {`${temperature}°${unit === TemperatureUnit.IMPERIAL ? "F" : "C"}`}
         </Typography>
         <Typography variant="body2" component="p">
           Date: {format(parseISO(date), "dd MMM yy")}

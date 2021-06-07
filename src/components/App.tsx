@@ -25,7 +25,6 @@ const theme = createMuiTheme({
 const styles = {
   app: {
     padding: 15,
-    "text-align": "center",
   },
 };
 

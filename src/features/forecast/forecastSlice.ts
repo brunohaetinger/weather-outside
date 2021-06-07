@@ -7,7 +7,7 @@ import {
 import { client } from "../../api/client";
 import { RootState } from "../../app/store";
 import { TemperatureUnit } from "../../constants/TemperatureUnit";
-import { ForecastItem, ForecastSegment } from "./types";
+import { ForecastSegment, ForecastState } from "./types";
 
 const APP_ID = "75f972b80e26f14fe6c920aa6a85ad57";
 const CITY = "Munich,de";
@@ -20,12 +20,6 @@ type DaysTemperatures = {
 type DayAverageTemperature = {
   date: string;
   temperature: number;
-};
-
-type ForecastState = {
-  isLoading: boolean;
-  error: string | null;
-  items: ForecastItem[];
 };
 
 const initialState: ForecastState = {
@@ -57,6 +51,11 @@ const forecastSlice: Slice<ForecastState, {}, "forecast"> = createSlice({
     builder.addCase(fetchForecast.fulfilled, (state, { payload }) => {
       state.items = [...payload];
       state.isLoading = false;
+    });
+    builder.addCase(fetchForecast.rejected, (state) => {
+      state.items = [];
+      state.isLoading = false;
+      state.error = "Error on getting weather forecast";
     });
   },
 });

@@ -1,3 +1,9 @@
+export type ForecastState = {
+  isLoading: boolean;
+  error: string | null;
+  items: ForecastItem[];
+};
+
 export type ForecastSegment = {
   temperature: number;
   time: string;

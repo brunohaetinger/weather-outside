@@ -1,4 +1,10 @@
-import { RadioGroup, FormControlLabel, Radio, Box } from "@material-ui/core";
+import {
+  RadioGroup,
+  FormControlLabel,
+  Radio,
+  Box,
+  Typography,
+} from "@material-ui/core";
 import React, { useEffect, useMemo, useState } from "react";
 import { useAppDispatch, useTypedSelector } from "../../app/store";
 import { TemperatureUnit } from "../../constants/TemperatureUnit";
@@ -38,7 +44,7 @@ const styles = {
 
 const WeatherInfo: React.FC = () => {
   const dispatch = useAppDispatch();
-  const { isLoading } = useTypedSelector(selectForecast);
+  const { isLoading, error } = useTypedSelector(selectForecast);
   const daysForecast = useTypedSelector(selectForecastGroupedByDay);
   const [selectedDay, setSelectedDay] = useState<string>("");
   const daySegmentsForecast = useTypedSelector(
@@ -128,13 +134,15 @@ const WeatherInfo: React.FC = () => {
           onClick={nextPage}
           color="secondary"
           fontSize="large"
+          data-testid="next-page-arrow"
         />
       </Box>
 
-      {daysForecast.length ? (
+      {daysForecast.length && !error ? (
         <Box style={styles.cardsBox}>
           {[...Array(pageSize)].map((e, i) => (
             <WeatherCard
+              key={daysForecast[pageIndex + i].date}
               isSelected={daysForecast[pageIndex + i].date === selectedDay}
               temperature={daysForecast[pageIndex + i].temperature}
               date={daysForecast[pageIndex + i].date}
@@ -143,7 +151,11 @@ const WeatherInfo: React.FC = () => {
             />
           ))}
         </Box>
-      ) : null}
+      ) : (
+        <Typography variant="body1" component="h1">
+          {error}
+        </Typography>
+      )}
       <DaySegmentsBarChart
         segments={daySegmentsForecast}
         unit={selectedTemperatureUnit}
